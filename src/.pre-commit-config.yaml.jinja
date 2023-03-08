@@ -101,7 +101,7 @@ repos:
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
         args: ["{{ repo_website }}"]
-{%- if false %}
+{%- if true %}
 {#- GRAP Disable autoflake, because something fails on github action #}
 
   - repo: https://github.com/myint/autoflake
@@ -169,7 +169,7 @@ repos:
     hooks:
       - id: pyupgrade
         args: ["--keep-percent-format"]
-{%- if false %}
+{%- if true %}
 {#- GRAP Disable isort, because something fails on github action #}
   - repo: https://github.com/PyCQA/isort
     rev: {{ repo_rev.isort }}
