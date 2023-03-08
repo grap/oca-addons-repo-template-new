@@ -169,6 +169,8 @@ repos:
     hooks:
       - id: pyupgrade
         args: ["--keep-percent-format"]
+{%- if false %}
+{#- GRAP Disable isort, because something fails on github action #}
   - repo: https://github.com/PyCQA/isort
     rev: {{ repo_rev.isort }}
     hooks:
@@ -177,6 +179,7 @@ repos:
         args:
           - --settings=.
         exclude: /__init__\.py$
+{%- endif %}
   - repo: https://github.com/acsone/setuptools-odoo
     rev: {{ repo_rev.setuptools_odoo }}
     hooks:
