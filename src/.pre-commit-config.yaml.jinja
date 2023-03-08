@@ -116,6 +116,8 @@ repos:
     rev: {{ repo_rev.black }}
     hooks:
       - id: black
+{%- if false %}
+{#- GRAP Disable mirrors-prettier, that makes ugly xml files #}
   - repo: https://github.com/pre-commit/mirrors-prettier
     rev: v{{ repo_rev.prettier }}
     hooks:
@@ -127,6 +129,7 @@ repos:
         args:
           - --plugin=@prettier/plugin-xml
         files: \.(css|htm|html|js|json|jsx|less|md|scss|toml|ts|xml|yaml|yml)$
+{%- endif %}
   - repo: https://github.com/pre-commit/mirrors-eslint
     rev: {{ repo_rev.eslint }}
     hooks:
