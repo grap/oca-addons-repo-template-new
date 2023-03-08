@@ -11,6 +11,12 @@ _migrations:
     after:
       - rm -f CONTRIBUTING.md
 
+odoo_real_version:
+  type: float
+  default: 12.0
+  choices:
+    - 12.0
+
 odoo_version:
   type: float
   default: 17.0

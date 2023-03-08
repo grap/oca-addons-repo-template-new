@@ -3,11 +3,11 @@ name: tests
 on:
   pull_request:
     branches:
-      - "{{ odoo_version }}*"
+      - "{{ odoo_real_version }}*"
   push:
     branches:
-      - "{{ odoo_version }}"
-      - "{{ odoo_version }}-ocabot-*"
+      - "{{ odoo_real_version }}"
+      - "{{ odoo_real_version }}-ocabot-*"
 
 {%
 set IMAGES = {
@@ -52,7 +52,7 @@ jobs:
               fi
           done
   test:
-{%- if odoo_version < 14 %}
+{%- if odoo_real_version < 14 %}
     runs-on: ubuntu-20.04
 {%- else %}
     runs-on: ubuntu-22.04
@@ -66,24 +66,24 @@ jobs:
         include:
         {%- for group in rebel_module_groups %}
             {%- if odoo_test_flavor in ["Odoo", "Both"] %}
-          - container: {{ IMAGES["odoo"][odoo_version] }}
+          - container: {{ IMAGES["odoo"][odoo_real_version] }}
             include: "{{ group }}"
             name: test with Odoo
             {%- endif %}
             {%- if odoo_test_flavor in ["OCB", "Both"] %}
-          - container: {{ IMAGES["ocb"][odoo_version] }}
+          - container: {{ IMAGES["ocb"][odoo_real_version] }}
             include: "{{ group }}"
             name: test with OCB
             {%- endif %}
             makepot: "{{ github_enable_makepot | bool | lower }}"
         {%- endfor %}
             {%- if odoo_test_flavor in ["Odoo", "Both"] %}
-          - container: {{ IMAGES["odoo"][odoo_version] }}
+          - container: {{ IMAGES["odoo"][odoo_real_version] }}
             exclude: "{{ rebel_module_groups|join(',') }}"
             name: test with Odoo
             {%- endif %}
             {%- if odoo_test_flavor in ["OCB", "Both"] %}
-          - container: {{ IMAGES["ocb"][odoo_version] }}
+          - container: {{ IMAGES["ocb"][odoo_real_version] }}
             exclude: "{{ rebel_module_groups|join(',') }}"
             name: test with OCB
             {%- endif %}
@@ -92,18 +92,18 @@ jobs:
         {#- If all modules can get along, we test and generate .pot all at once #}
         include:
             {%- if odoo_test_flavor in ["Odoo", "Both"] %}
-          - container: {{ IMAGES["odoo"][odoo_version] }}
+          - container: {{ IMAGES["odoo"][odoo_real_version] }}
             name: test with Odoo
             {%- endif %}
             {%- if odoo_test_flavor in ["OCB", "Both"] %}
-          - container: {{ IMAGES["ocb"][odoo_version] }}
+          - container: {{ IMAGES["ocb"][odoo_real_version] }}
             name: test with OCB
             {%- endif %}
             makepot: "{{ github_enable_makepot | bool | lower }}"
         {%- endif %}
     services:
       postgres:
-        {%- if odoo_version < 16 %}
+        {%- if odoo_real_version < 16 %}
         image: postgres:9.6
         {%- else %}
         image: postgres:12.0
