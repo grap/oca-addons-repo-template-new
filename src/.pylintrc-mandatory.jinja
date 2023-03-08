@@ -11,7 +11,7 @@ manifest_required_authors={{ org_name }}
 manifest_required_keys=license
 manifest_deprecated_keys=description,active
 license_allowed=AGPL-3,GPL-2,GPL-2 or any later version,GPL-3,GPL-3 or any later version,LGPL-3
-valid_odoo_versions={{ odoo_version }}
+valid_odoo_versions={{ odoo_real_version }}
 
 [MESSAGES CONTROL]
 disable=all
@@ -60,7 +60,7 @@ enable=anomalous-backslash-in-string,
     use-vim-comment,
     wrong-tabs-instead-of-spaces,
     xml-syntax-error
-{%- if odoo_version >= 15 %},
+{%- if odoo_real_version >= 15 %},
     attribute-string-redundant,
     character-not-valid-in-resource-link,
     consider-merging-classes-inherited,
@@ -94,7 +94,7 @@ enable=anomalous-backslash-in-string,
     xml-deprecated-qweb-directive,
     xml-deprecated-tree-attribute
 {%- endif %}
-{%- if odoo_version >= 16 %},
+{%- if odoo_real_version >= 16 %},
     external-request-timeout
 {%- endif %}
 {%- block optional_checks %}{% endblock %}
