@@ -101,6 +101,9 @@ repos:
       - id: oca-update-pre-commit-excluded-addons
       - id: oca-fix-manifest-website
         args: ["{{ repo_website }}"]
+{%- if false %}
+{#- GRAP Disable autoflake, because something fails on github action #}
+
   - repo: https://github.com/myint/autoflake
     rev: {{ repo_rev.autoflake }}
     hooks:
@@ -112,6 +115,7 @@ repos:
           - --remove-all-unused-imports
           - --remove-duplicate-keys
           - --remove-unused-variables
+{%- endif %}
   - repo: https://github.com/psf/black
     rev: {{ repo_rev.black }}
     hooks:
