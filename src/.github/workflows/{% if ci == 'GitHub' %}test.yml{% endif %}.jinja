@@ -87,8 +87,11 @@ jobs:
           - container: {{ IMAGES["odoo"][odoo_real_version] }}
             makepot: "{{ github_enable_makepot | bool | lower }}"
             name: test with Odoo
+        {%- if false %}
+        {#- GRAP Disable OCB#}
           - container: {{ IMAGES["ocb"][odoo_real_version] }}
             name: test with OCB
+        {%- endif %}
         {%- endif %}
     services:
       postgres:
